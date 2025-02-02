@@ -25,21 +25,9 @@ public class Main
             showMenu(1, 1);
             // System.out.print("Select an option: ");
             // int opt = input.nextInt();
-            int opt;
-            try {
-                opt = Integer.parseInt(prompt("Select an option: "));
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid option! please enter an option between 1-5 ^-^.");
-                continue;  // Go back to the menu
-            }
-        
-            if (opt < 1 || opt > 5) {
-                System.out.println("Invalid option! Please select a valid menu option.");
-                continue;  // Go back to the menu
-            }
-        
-        
-            switch(opt)
+            int opt = Integer.parseInt(prompt("Select an option: "));
+           5
+            switch (opt)
             {
                 case 1:
                     pb.insert(createNewPerson());
@@ -66,20 +54,7 @@ public class Main
                     while (true)
                     {
                         showMenu(3, 1);
-                        int showOpt;
-                        try {
-                            showOpt = Integer.parseInt(prompt("Enter option: "));
-                        } catch (NumberFormatException e) {
-                            System.out.println("Invalid option! Please enter a number.");
-                            continue;
-                        }
-
-                        if (showOpt < 1 || showOpt > 4) {
-                            System.out.println("Invalid option! Please select a valid menu option.");
-                            continue;
-                        }
-        
-        
+                        int showOpt = Integer.parseInt(prompt("Enter option:"));
                         if (showOpt == 1)
                         {
                             System.out.println(pb);
@@ -103,13 +78,7 @@ public class Main
                             int[] countryCodes = new int[9];
                             while (true)
                             {
-                                int countryCode;
-                                try {
-                                    countryCode = Integer.parseInt(prompt("Enter Country Code (0 to finish): "));
-                                } catch (NumberFormatException e) {
-                                    System.out.println("Invalid input! Please enter a number.");
-                                    continue;
-                                }
+                                int countryCode = Integer.parseInt("Enter Country Code: ");
                                 // Print if input is 0
                                 if (countryCode == 0)
                                 {
@@ -214,7 +183,6 @@ public class Main
         lname = prompt("Enter Last Name: ");
         occupation = prompt("Enter Occupation: ");
         sex = prompt("Enter sex/gender: ");
-        
         countryCode = Integer.parseInt(prompt("Enter Country Code: "));
         areaCode = Integer.parseInt(prompt("Enter Area Code: "));
         contactNum = prompt("Enter Contact Number: ");
