@@ -81,6 +81,9 @@ public class Phonebook
     private void increasePhonebookMaxSize()
     {
         // Complete this method
+        Person[] newContacts = new Person[contacts.length * 2];
+        System.arraycopy(contacts, 0, newContacts, 0, contacts.length);
+        contacts = newContacts;
     }
 
     /**
