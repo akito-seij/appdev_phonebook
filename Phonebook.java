@@ -19,7 +19,7 @@ public class Phonebook
     public int getSize()
     {
         // Complete this method
-        return 0;
+        return this.size;
     }
 
     /**
@@ -43,6 +43,9 @@ public class Phonebook
     public Person getContact(String id)
     {
         // Complete this method
+        for (int i = 0; i < this.size; i++) {
+            return contacts[i];
+        }
         return null;
     }
 
