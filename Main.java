@@ -26,7 +26,6 @@ public class Main
             // System.out.print("Select an option: ");
             // int opt = input.nextInt();
             int opt = Integer.parseInt(prompt("Select an option: "));
-           5
             switch (opt)
             {
                 case 1:
