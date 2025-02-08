@@ -11,6 +11,7 @@ public class Phonebook
     public Phonebook()
     {
         contacts = new Person[50];
+        size = 0;
     }
 
     /**
@@ -112,7 +113,12 @@ public class Phonebook
     private int findIndexInsertion(Person p)
     {
         // Complete this method
-        return 0;
+        for (int i = 0; i < size; i++) {
+            if (contacts[i].getId().compareTo(p.getId()) > 0) {
+                return i;
+            }
+        }
+        return size;
     }
 
     /**
@@ -175,7 +181,16 @@ public class Phonebook
     public String printContactsFromCountryCodes(int... countryCodes)
     {
         // Complete this method.
-        return "";
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            for (int code : countryCodes) {
+                if (contacts[i].getCountryCode() == code) {
+                    result.append(contacts[i].toString()).append("\n");
+                    break;
+                }
+            }
+        }
+        return result.toString();
     }
 
     /**
@@ -186,6 +201,10 @@ public class Phonebook
     public String toString()
     {
         // Complete this method.
-        return "";
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            result.append(contacts[i].toString()).append("\n");
+        }
+        return result.toString();
     }
 }
