@@ -124,6 +124,15 @@ public class Phonebook
     public Person deleteContact(String id)
     {
         // Complete this method...
+        for (int i = 0; i < size; i++) {
+            if (contacts[i].getId().equals(id)) {
+                Person removed = contacts[i];
+                adjustPhonebook(i, size - 1, "f");
+                contacts[size - 1] = null;
+                size--;
+                return removed;
+            }
+        }
         return null;
     }
 
