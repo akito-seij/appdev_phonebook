@@ -94,6 +94,13 @@ public class Phonebook
     public void insert(Person p)
     {
         // Complete this method
+        if (size == contacts.length) {
+            increasePhonebookMaxSize();
+        }
+        int index = findIndexInsertion(p);
+        adjustPhonebook(index, size, "b");
+        contacts[index] = p;
+        size++;
     }
 
     /**
