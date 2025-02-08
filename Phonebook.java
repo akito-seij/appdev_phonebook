@@ -149,6 +149,15 @@ public class Phonebook
     private void adjustPhonebook(int start, int end, String direction)
     {
         // Complete this method...
+        if (direction.equals("f")) {
+            for (int i = start; i < end; i++) {
+                contacts[i] = contacts[i + 1];
+            }
+        } else if (direction.equals("b")) {
+            for (int i = end; i > start; i--) {
+                contacts[i] = contacts[i - 1];
+            }
+        }
     }
 
     /**
