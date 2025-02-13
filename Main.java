@@ -138,6 +138,61 @@ public class Main
      * @param inlineTexts Number of menu options to be printed in a single line. Set to 1 if you
      *        want every line to only have one menu option.
      */
+    private static void editContact(Phonebook pb) {
+        String id = prompt("Enter student number to edit: ");
+        Person existingContact = pb.getContact(id);
+        if (existingContact == null) {
+            System.out.println("Contact not found!");
+            return;
+        }
+
+        System.out.println("Here is the existing information about " + id + ":");
+        System.out.println(existingContact);
+
+        while (true) {
+            System.out.println("Which of the following information do you wish to change?");
+            System.out.println("[1] Student number   [2] Surname   [3] Gender   [4] Occupation");
+            System.out.println("[5] Country code   [6] Area code   [7] Phone number");
+            System.out.println("[8] None - Go back to Main Menu");
+            int choice = Integer.parseInt(prompt("Enter choice: "));
+
+            switch (choice) {
+                case 1:
+                    String newId = prompt("Enter new student number: ");
+                    existingContact.setId(newId);
+                    break;
+                case 2:
+                    String newSurname = prompt("Enter new surname: ");
+                    existingContact.setLName(newSurname);
+                    break;
+                case 3:
+                    String newGender = prompt("Enter new gender (M/F): ");
+                    existingContact.setSex(newGender);
+                    break;
+                case 4:
+                    String newOccupation = prompt("Enter new occupation: ");
+                    existingContact.setOccupation(newOccupation);
+                    break;
+                case 5:
+                    int newCountryCode = Integer.parseInt(prompt("Enter new country code: "));
+                    existingContact.setCountryCode(newCountryCode);
+                    break;
+                case 6:
+                    int newAreaCode = Integer.parseInt(prompt("Enter new area code: "));
+                    existingContact.setAreaCode(newAreaCode);
+                    break;
+                case 7:
+                    String newPhoneNumber = prompt("Enter new phone number: ");
+                    existingContact.setContactNum(newPhoneNumber);
+                    break;
+                case 8:
+                    return; // Go back to main menu
+                default:
+                    System.out.println("Invalid option!");
+            }
+            System.out.println("Updated information: " + existingContact);
+        }
+    }
     private static void showMenu(int menuIdx, int inlineTexts)
     {
         String[] menu = MENUS[menuIdx - 1];
