@@ -32,6 +32,7 @@ public class Main
                     pb.insert(createNewPerson());
                     break;
                 case 2:
+                    editContact(pb);
                     break;
                 case 3:
                     String id = prompt("Enter contact ID to delete: ");
