@@ -13,7 +13,11 @@ public class Main
             {
                     // Menu for View Phonebook
                     "View All", "View Contact through ID", "View Contacts through Country Code",
-                    "Go back to Main Menu" }, };
+                    "Go back to Main Menu" },
+            {
+            "Burma", "Cambodia", "Thailand", "Vietnam", "Malaysia", "Philippines", "Indonesia",
+            "Timor Leste", "Laos", "Brunei", "Singapore", "ALL"
+    } };
     private static final Scanner input = new Scanner(System.in);
 
     public static void main(String[] args)
@@ -22,17 +26,117 @@ public class Main
         boolean exit = false;
         while (true)
         {
-            showMenu(1, 1);
-            // System.out.print("Select an option: ");
-            // int opt = input.nextInt();
-            int opt = Integer.parseInt(prompt("Select an option: "));
+            //error handling
+            int opt = -1;
+            try
+            {
+                showMenu(1, 1);
+                opt = Integer.parseInt(prompt("Select an option: "));
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid input!");
+            }
+
             switch (opt)
             {
                 case 1:
-                    pb.insert(createNewPerson());
+                    // Add new contact
+                    while(true) {
+                        String id = prompt("Enter Contact ID: ");
+                        String fname = prompt("Enter First Name: ");
+                        String lname = prompt("Enter Last Name: ");
+                        String occupation = prompt("Enter Occupation: ");
+                        String sex = prompt("Enter gender (M for male, F for female): ");
+                        int countryCode = Integer.parseInt(prompt("Enter Country Code: "));
+                        int areaCode = Integer.parseInt(prompt("Enter Area Code: "));
+                        String contactNum = prompt("Enter Contact Number: ");
+
+                        Person newPerson = new Person(id, fname, lname, sex, occupation, contactNum, countryCode, areaCode);
+                        pb.insert(newPerson);
+
+                        String make_more = prompt("Do you want to make more contacts? (y/n): ");
+                        if (make_more.equals("y")){
+                            continue;
+                        }
+                        else if (make_more.equals("n")) {
+                            break;
+                        }
+                    }
                     break;
+
                 case 2:
+                    // Edit
+                    EDIT: // block labeling for easier exiting
+                    while (true)
+                    {
+                        String idtoEdit = prompt("Enter ID of contact to edit(0 to exit): ");
+
+                        Person person = pb.getContact(idtoEdit);
+                        if (person != null)
+                        {
+                            while (true)
+                            {
+                                System.out.println("Here is the existing information about " + person.getId());
+                                System.out.println(person);
+                                System.out.println("Which would you like to edit?");
+                                showMenu(2, 1);
+                                int choice = Integer.parseInt(prompt("Enter Choice: "));
+                                switch (choice)
+                                {
+                                    case 1:
+                                        String newID = prompt("Enter new ID: ");
+                                        person.setId(newID);
+                                        break;
+
+                                    case 2:
+                                        String newFname = prompt("Enter new first name: ");
+                                        person.setFName(newFname);
+                                        break;
+
+                                    case 3:
+                                        String newLname = prompt("Enter new last name: ");
+                                        person.setLName(newLname);
+                                        break;
+
+                                    case 4:
+                                        String newOccupation = prompt("Enter new occupation: ");
+                                        person.setOccupation(newOccupation);
+                                        break;
+
+                                    case 5:
+                                        int newCountryCode = Integer.parseInt(prompt("Enter new Country Code: "));
+                                        person.setCountryCode(newCountryCode);
+                                        break;
+
+                                    case 6:
+                                        int newAreaCode = Integer.parseInt(prompt("Enter new Area Code: "));
+                                        person.setAreaCode(newAreaCode);
+                                        break;
+
+                                    case 7:
+                                        String newNum = prompt("Enter new number: ");
+                                        person.setContactNum(newNum);
+                                        break;
+
+                                    case 8:
+                                        break EDIT;
+
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+                        else if (idtoEdit.equals("0"))
+                        {
+                            break EDIT;
+                        }
+                        else{
+                            System.out.println("Contact does not exist");
+                        }
+                    }
                     break;
+
+                    
                 case 3:
                     String id = prompt("Enter contact ID to delete: ");
                     Person p = pb.getContact(id);
