@@ -138,21 +138,25 @@ public class Main
 
                     
                 case 3:
-                    String id = prompt("Enter contact ID to delete: ");
-                    Person p = pb.getContact(id);
-                    if (p != null)
-                    {
-                        Person deletedContact = pb.deleteContact(id);
-                        if (deletedContact != null)
-                        {
-                            System.out.println("Contact has been successfully deleted!");
+                    // Delete
+                    String get_id = prompt("Enter contact ID to delete: ");
+                    Person person_exist = pb.getContact(get_id);
+                    if (person_exist != null){
+                        String make_sure = prompt("Are you sure you want to delete it? (y/n): ");
+                        if (make_sure.equals("y")){
+                            Person deletedContact = pb.deleteContact(get_id);
+                            System.out.println(String.format("Contact %s has been deleted.", deletedContact.getId()));
+                            break;
+                        }
+                        else {
+                            System.out.println("Deletion did not proceed.");
                         }
                     }
-                    else
-                    {
-                        System.out.println("This contact does not exist!");
+                    else {
+                        System.out.println("Contact does not exist");
                     }
                     break;
+
                 case 4:
                     while (true)
                     {
@@ -172,7 +176,7 @@ public class Main
                             }
                             else
                             {
-                                System.out.println("No contact exists with that surname!");
+                                System.out.println("No contact exists with this ID!");
                             }
                         }
                         else if (showOpt == 3)
