@@ -182,36 +182,43 @@ public class Main
                         else if (showOpt == 3)
                         {
                             int ccCount = 0;
-                            int[] countryCodes = new int[9];
+                            int[] countryCodes = new int[11];
                             while (true)
                             {
-                                int countryCode = Integer.parseInt("Enter Country Code: ");
-                                // Print if input is 0
+                                showMenu(4, 5);
+                                System.out.println("[0] No More");
+
+                                int countryCode = Integer.parseInt(prompt("Enter Country Code: "));
+
                                 if (countryCode == 0)
                                 {
-                                    pb.printContactsFromCountryCodes(countryCodes);
                                     break;
                                 }
-                                // Check if area code is already inputted
-                                boolean exists = false;
-                                for (int a : countryCodes)
-                                {
-                                    if (a == countryCode)
-                                    {
-                                        System.out.println(
-                                                "This area code has already been inputted!");
-                                        exists = true;
-                                        break;
+
+                                else if (countryCode == 12) {
+                                    int[] allCodes = new int[11];
+                                    for (int i = 1; i <= allCodes.length; i++) {
+                                        allCodes[i-1] = convertChoices(i);
+                                    }
+                                    countryCodes = allCodes;
+                                    break;
+                                }
+                                else if (countryCode > 0 && countryCode < 12) {
+                                    boolean does_exist = false;
+                                    for (int i = 0; i <= ccCount; i++) {
+                                        if (countryCodes[i] == convertChoices(countryCode)) {
+                                            does_exist = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!does_exist) {
+                                        countryCodes[ccCount] = convertChoices(countryCode);
+                                        ccCount++;
                                     }
                                 }
-                                // Only add if area codes isn't part of the array...
-                                if (!exists)
-                                {
-                                    countryCodes[ccCount] = countryCode;
-                                    ccCount++;
-                                }
-
                             }
+                            System.out.println("Here are the contacts from the country you chose:");
+                            System.out.println(pb.printContactsFromCountryCodes(countryCodes));
                         }
                         else if (showOpt == 4)
                         {
@@ -219,9 +226,11 @@ public class Main
                         }
                     }
                     break;
+
                 case 5:
                     exit = true;
                     break;
+
                 default:
                     System.out.println("Invalid option!");
             }
@@ -232,15 +241,11 @@ public class Main
 
     /**
      * Show menu based on given index. <br>
-     * <br>
      * 1 for Main Menu. <br>
-     * <br>
      * 2 for Edit Contact Menu. <br>
-     * <br>
      * 3 for View Phonebook Menu. <br>
-     * <br>
      * 4 for Country Code Menu.
-     * 
+     *
      * @param menuIdx Index of the menu to be shown.
      * @param inlineTexts Number of menu options to be printed in a single line. Set to 1 if you
      *        want every line to only have one menu option.
@@ -267,39 +272,31 @@ public class Main
 
     /**
      * Convert choices from the menu into their appropriate country code values.
-     * 
+     *
      * @return Country code value of the menu choice.
      */
-    private int convertChoices(int choice)
+    private static int convertChoices(int choice)
     {
-        // Complete this method.
-        return 0;
-    }
-
-    /**
-     * Create a new person object using a slightly complicated setup.
-     * 
-     * @return Newly created person object.
-     */
-    private static Person createNewPerson()
-    {
-        String id, fname, lname, sex, occupation, contactNum;
-        int countryCode, areaCode;
-        id = prompt("Enter Contact ID: ");
-        fname = prompt("Enter First Name: ");
-        lname = prompt("Enter Last Name: ");
-        occupation = prompt("Enter Occupation: ");
-        sex = prompt("Enter sex/gender: ");
-        countryCode = Integer.parseInt(prompt("Enter Country Code: "));
-        areaCode = Integer.parseInt(prompt("Enter Area Code: "));
-        contactNum = prompt("Enter Contact Number: ");
-        return new Person(id, fname, lname, sex, occupation, contactNum, countryCode, areaCode);
+        switch(choice){
+            case 1: return 865; // Burma
+            case 2: return 855; // Cambodia
+            case 3: return 66; // Thailand
+            case 4: return 84; // Vietnam
+            case 5: return 60; // Malaysia
+            case 6: return 63; // Philippines
+            case 7: return 62; // Indonesia
+            case 8: return 670; // Timor Leste
+            case 9: return 95; // Laos
+            case 10: return 673; // Brunei
+            case 11: return 65; // Singapore
+            default: return 0; // Default case
+        }
     }
 
     /**
      * Receive prompt and return the inputted value back to the variable or process that requires
      * it. Data type is String. Do not forget to type cast if possible.
-     * 
+     *
      * @param phrase Phrase to be given to user when requiring input.
      * @return Returns the data needed.
      */
